@@ -1,0 +1,16 @@
+﻿@page "/exchange"
+@page "/exchange/{text}"
+
+<h1>Exchange is @Text!</h1>
+
+@code
+{
+
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
