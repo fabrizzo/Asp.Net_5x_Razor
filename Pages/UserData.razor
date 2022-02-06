@@ -1,0 +1,54 @@
+﻿@page "/userdata"
+
+@using WebApplication2.Data
+@inject UserForecastService UserForecast
+
+<h1>UserForecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (userforecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <RadzenGrid AllowSorting="true" Data="@userforecasts" TItem="UserForecast">
+        <Columns>
+            <RadzenGridColumn TItem="UserForecast" Context="data" Property="ID" Title="ID" Type="Int">
+                <Template>
+                    @data.PersonID
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="UserForecast" Context="data" Property="Firstname" Title="FirstName" Type="string">
+                <Template>
+                    @data.LastName
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="UserForecast" Context="data" Property="Lastname" Title="LastName" Type="string">
+                <Template>
+                    @data.FirstName
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="UserForecast" Context="data" Property="City" Title="Summary" Type="string">
+                <Template>
+                    @data.City
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="UserForecast" Context="data" Property="Address" Title="Summary" Type="string">
+                <Template>
+                    @data.Address
+                </Template>
+            </RadzenGridColumn>
+        </Columns>
+    </RadzenGrid>
+}
+
+@code {
+    private List<UserForecast> userforecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userforecasts = UserForecast.GetForecastAsync();
+    }
+}
